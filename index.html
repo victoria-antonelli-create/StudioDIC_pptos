@@ -34,7 +34,7 @@ th{height:43px;background:#f0f0ef;text-align:center;padding:8px;font-size:14px}
 th:nth-child(1),td:nth-child(1){width:50%}
 th:nth-child(2),td:nth-child(2){width:25%}
 th:nth-child(3),td:nth-child(3){width:25%}
-td{height:58px;padding:0}
+td{height:auto;padding:0}
 .work-input{width:100%;height:auto;border:0;resize:none;padding:7px;font-family:Arial,Helvetica,sans-serif;font-size:12px;outline:none;background:transparent}
 .action-col{display:none!important}
 .add{width:100%;margin-top:8px;border:0;background:#e5e3e1;padding:10px;font-weight:700;font-size:14px;cursor:pointer}
@@ -202,6 +202,13 @@ function limpiar(){
  for(let i=0;i<5;i++)addRow();
 }
 function generarPDF(){
+ document.querySelectorAll("#items tr").forEach(tr=>{
+  tr.style.height="auto";
+  tr.querySelectorAll(".work-input").forEach(textarea=>{
+    textarea.style.height="auto";
+    textarea.style.height=textarea.scrollHeight+"px";
+  });
+});
  const cliente=document.getElementById("cliente").value.trim()||"Sin cliente";
  document.title="Presupuesto "+String(numero).padStart(3,"0")+" - "+cliente;
  localStorage.setItem(KEY,String(numero+1));
